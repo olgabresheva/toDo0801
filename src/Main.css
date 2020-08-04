@@ -1,17 +1,9 @@
-.App {
-  text-align: center;
+.container {
+  padding: 20px;
 }
-
-.ToDoCreateForm {
-  margin: 20px;
-}
-
-.ToDoItem {
-  margin: 5px;
-}
-
 
 .done {
   color: rgba(0, 0, 0, 0.3);
   text-decoration: line-through;
 }
+

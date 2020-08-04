@@ -2,17 +2,20 @@ import React from 'react';
 import './Main.css';
 import ToDoItem from "./ToDoItem";
 
+
 function ToDoList(props) {
     return (
         <div className="ToDoList">
-            {props.list.map(el => <div key={el.id}>
+            <ul className="list-unstyled">
+            {props.list.map(el => <li key={el.id}>
                 <ToDoItem item={el}
                           onTaskDelete={props.onTaskDelete}
                           onStatusChange={props.onStatusChange}
                           onTaskEditSave={props.onTaskEditSave}
                           taskEditSave={props.taskEditSave}
                           onTaskMove={props.onTaskMove}/>
-            </div>)}
+            </li>)}
+            </ul>
 
 
         </div>
