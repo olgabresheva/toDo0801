@@ -52,11 +52,11 @@ function ToDoItem(props) {
                 ? <>
                     <input type="text" className="form-control form-control-sm"
                            value={editTaskTitle} onChange={(e) => setEditTaskTitle(e.target.value)}/>
-                    <button className="btn btn-outline-secondary" onClick={onTaskEditSave}>Save</button>
+                    <button className="btn btn-outline-secondary btn-sm" onClick={onTaskEditSave}>Save</button>
                 </>
                 :
                 <span className={props.item.done ? "done form-control form-control-sm" : "form-control form-control-sm"}
-                      onClick={() => setEditMode(true)}>{props.item.title}</span>
+                      onDoubleClick={() => setEditMode(true)}>{props.item.title}</span>
             }
             <div className="input-group-append" id="button-addon">
                 <button className="btn btn-outline-secondary btn-sm"

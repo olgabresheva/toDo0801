@@ -47,7 +47,7 @@ function App() {
     const onTaskMove = (id, direction) => {
         let i = list.findIndex(el => el.id === id);
         let updatedList;
-        if (i >= 0) {
+        if (i !== 0) {
             updatedList = [...list];
             if (direction === 'up') {
                 updatedList.splice(i - 1, 0, updatedList.splice(i, 1)[0]);
