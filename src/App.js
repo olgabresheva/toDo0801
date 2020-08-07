@@ -44,6 +44,7 @@ function App() {
         setList(updatedList);
     }
 
+    //function which changes array element location based on given direction
     const onTaskMove = (id, direction) => {
         let i = list.findIndex(el => el.id === id);
         let updatedList;
