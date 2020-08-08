@@ -7,6 +7,7 @@ function ToDoCreateForm(props) {
     const [newTaskInput, setNewTaskInput] = useState('')
     const [addTaskDisabled, setAddTaskDisabled] = useState(true);
 
+    //function for task creation and controlling of button being active/disabled
     const taskInput = (e) => {
         setNewTaskInput(e.target.value);
         (newTaskInput.length > 2) ? setAddTaskDisabled(false) : setAddTaskDisabled(true);

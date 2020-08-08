@@ -48,6 +48,7 @@ function ToDoItem(props) {
 
     return (
         <div className="input-group">
+            {/*edit mode handler*/}
             {editMode
                 ? <>
                     <input type="text" className="form-control form-control-sm"
