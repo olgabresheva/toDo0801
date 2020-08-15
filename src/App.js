@@ -4,6 +4,7 @@ import ToDoCreateForm from "./ToDoCreateForm";
 import ToDoList from "./ToDoList";
 import {uuid} from "uuidv4";
 import 'bootstrap/dist/css/bootstrap.min.css'
+import axios from 'axios';
 
 const initialList = [
     {id: 1, title: 'Task 1', done: true},
@@ -12,6 +13,16 @@ const initialList = [
 ];
 
 function App() {
+
+    axios.get('http://localhost:3002/toDo0801')
+        .then(result => {
+
+        })
+        .catch(function (error) {
+            console.log(error);
+
+        });
+
 
     const [list, setList] = useState(initialList);
 
