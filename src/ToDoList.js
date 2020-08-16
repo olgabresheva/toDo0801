@@ -7,7 +7,7 @@ function ToDoList(props) {
     return (
         <div className="ToDoList">
             <ul className="list-unstyled">
-                {props.list.map(el => <li key={el.id}>
+                {props.list.map(el => <li key={el._id}>
                     <ToDoItem item={el}
                               onTaskDelete={props.onTaskDelete}
                               onStatusChange={props.onStatusChange}

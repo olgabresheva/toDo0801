@@ -39,10 +39,10 @@ const upBtn = (<svg width="1em" height="1em" viewBox="0 0 16 16" className="bi b
 function ToDoItem(props) {
 
     const [editMode, setEditMode] = useState(false);
-    const [editTaskTitle, setEditTaskTitle] = useState(props.item.title);
+    const [editTaskTitle, setEditTaskTitle] = useState(props.item.name);
 
     const onTaskEditSave = () => {
-        props.taskEditSave(props.item.id, editTaskTitle);
+        props.taskEditSave(props.item._id, editTaskTitle);
         setEditMode(false);
     }
 
@@ -57,17 +57,19 @@ function ToDoItem(props) {
                 </>
                 :
                 <span className={props.item.done ? "done form-control form-control-sm" : "form-control form-control-sm"}
-                      onDoubleClick={() => setEditMode(true)}>{props.item.title}</span>
+                      onDoubleClick={() => setEditMode(true)}>
+                    {props.item.name}
+                </span>
             }
             <div className="input-group-append" id="button-addon">
                 <button className="btn btn-outline-secondary btn-sm"
-                        onClick={() => props.onStatusChange(props.item.id)}>{props.item.done ? doneBtn : toDoBtn}</button>
+                        onClick={() => props.onStatusChange(props.item._id)}>{props.item.done ? doneBtn : toDoBtn}</button>
                 <button className="btn btn-outline-secondary btn-sm"
-                        onClick={() => props.onTaskDelete(props.item.id)}>{deleteBtn}</button>
+                        onClick={() => props.onTaskDelete(props.item._id)}>{deleteBtn}</button>
                 <button className="btn btn-outline-secondary btn-sm"
-                        onClick={() => props.onTaskMove(props.item.id, 'up')}>{upBtn}</button>
+                        onClick={() => props.onTaskMove(props.item._id, 'up')}>{upBtn}</button>
                 <button className="btn btn-outline-secondary btn-sm"
-                        onClick={() => props.onTaskMove(props.item.id, 'down')}>{downBtn}</button>
+                        onClick={() => props.onTaskMove(props.item._id, 'down')}>{downBtn}</button>
             </div>
         </div>
     );

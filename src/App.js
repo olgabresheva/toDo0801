@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './Main.css';
 import ToDoCreateForm from "./ToDoCreateForm";
 import ToDoList from "./ToDoList";
@@ -6,36 +6,61 @@ import {uuid} from "uuidv4";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import axios from 'axios';
 
-const initialList = [
-    {id: 1, title: 'Task 1', done: true},
-    {id: 2, title: 'Task 2', done: false},
-    {id: 3, title: 'Task 3', done: true},
-];
+// const initialList = [
+//     {id: 1, title: 'Task 1', done: true},
+//     {id: 2, title: 'Task 2', done: false},
+//     {id: 3, title: 'Task 3', done: true},
+// ];
 
 function App() {
 
-    axios.get('http://localhost:3002/toDo0801')
-        .then(result => {
+    const [list, setList] = useState([]);
 
+    const getFullList = () => {
+        axios({
+            url: 'http://localhost:5000/todo',
+            method: 'GET',
         })
-        .catch(function (error) {
-            console.log(error);
-
-        });
-
-
-    const [list, setList] = useState(initialList);
-
-    const onNewTaskAdd = (title) => {
-        const updatedList = [...list];
-        updatedList.push({id: uuid(), title: title, done: false});
-        setList(updatedList);
+            .then(res => {
+                setList(res.data)
+            })
+            .catch(e => console.log(e))
     }
+
+    useEffect(() => {
+        getFullList();
+    }, []);
 
     const onTaskDelete = (id) => {
-        const updatedList = list.filter(el => el.id !== id);
-        setList(updatedList);
-    }
+        axios({
+            url: `http://localhost:5000/todo/${id}`,
+            method: 'DELETE'
+        })
+            .then(res => {getFullList()})
+            .catch(e => console.log(e))
+    };
+
+    // const onTaskDelete = (id) => {
+    //     const updatedList = list.filter(el => el.id !== id);
+    //     setList(updatedList);
+    // }
+
+
+    const onNewTaskAdd = (name, description) => {
+        axios({
+            url: 'http://localhost:5000/todo/',
+            method: 'POST',
+            data: {name, description}
+        })
+            .then(res => {getFullList()})
+            .catch(e => console.log(e))
+    };
+
+    // const onNewTaskAdd = (title, description) => {
+    //     const updatedList = [...list];
+    //     updatedList.push({id: uuid(), name: title, description: description, done: false});
+    //     setList(updatedList);
+    // }
 
     const onStatusChange = (id) => {
         const updatedList = list.map(el => {
@@ -49,7 +74,7 @@ function App() {
     const taskEditSave = (id, newTitle) => {
         const updatedList = list.map(el => {
             if (el.id === id) {
-                return ({...el, title: newTitle})
+                return ({...el, name: newTitle})
             } else return el;
         })
         setList(updatedList);

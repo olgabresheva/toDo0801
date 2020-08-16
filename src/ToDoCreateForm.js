@@ -4,18 +4,20 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 function ToDoCreateForm(props) {
 
-    const [newTaskInput, setNewTaskInput] = useState('')
+    const [taskNameInput, setTaskNameInput] = useState('')
+    const [taskDescriptionInput, setTaskDescriptionInput] = useState('')
     const [addTaskDisabled, setAddTaskDisabled] = useState(true);
 
     //function for task creation and controlling of button being active/disabled
-    const taskInput = (e) => {
-        setNewTaskInput(e.target.value);
-        (newTaskInput.length > 2) ? setAddTaskDisabled(false) : setAddTaskDisabled(true);
+    const newTaskDescriptionInput = (e) => {
+        setTaskDescriptionInput(e.target.value);
+        (taskDescriptionInput.length > 2) ? setAddTaskDisabled(false) : setAddTaskDisabled(true);
     }
 
     const addNewTask = (e) => {
-        props.onNewTaskAdd(newTaskInput);
-        setNewTaskInput('');
+        props.onNewTaskAdd(taskNameInput, taskDescriptionInput);
+        setTaskNameInput('');
+        setTaskDescriptionInput('')
         e.preventDefault();
         setAddTaskDisabled(true)
     }
@@ -26,9 +28,17 @@ function ToDoCreateForm(props) {
             <form>
                 <div className="row">
                     <div className="col">
-                        <input type="text" className="form-control form-control-sm" value={newTaskInput}
-                               onChange={taskInput}/>
+                        <input type="text" className="form-control form-control-sm" value={taskNameInput}
+                               placeholder="Enter Task Name"
+                               onChange={e => setTaskNameInput(e.target.value)}/>
                     </div>
+                    <div className="col">
+                        <input type="text" className="form-control form-control-sm" value={taskDescriptionInput}
+                               placeholder="Enter Task Description"
+                               onChange={newTaskDescriptionInput}/>
+                    </div>
+                </div>
+                <div className="row">
                     <div className="col">
                         <button disabled={addTaskDisabled} type="submit" className="btn btn-info btn-sm"
                                 onClick={addNewTask}>Add Task
