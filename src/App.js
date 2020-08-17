@@ -36,7 +36,9 @@ function App() {
             url: `http://localhost:5000/todo/${id}`,
             method: 'DELETE'
         })
-            .then(res => {getFullList()})
+            .then(res => {
+                getFullList()
+            })
             .catch(e => console.log(e))
     };
 
@@ -52,7 +54,9 @@ function App() {
             method: 'POST',
             data: {name, description}
         })
-            .then(res => {getFullList()})
+            .then(res => {
+                getFullList()
+            })
             .catch(e => console.log(e))
     };
 
@@ -63,37 +67,61 @@ function App() {
     // }
 
     const onStatusChange = (id) => {
-        const updatedList = list.map(el => {
-            if (el.id === id) {
-                return ({...el, done: !el.done})
-            } else return el
+        axios({
+            url: `http://localhost:5000/todo/${id}`,
+            method: 'PUT',
+            data: {done: true},
         })
-        setList(updatedList);
+            .then(res => {
+                getFullList()
+            })
+            .catch(e => console.log(e))
     }
 
+    // const onStatusChange = (id) => {
+    //     const updatedList = list.map(el => {
+    //         if (el.id === id) {
+    //             return ({...el, done: !el.done})
+    //         } else return el
+    //     })
+    //     setList(updatedList);
+    // }
+
     const taskEditSave = (id, newTitle) => {
-        const updatedList = list.map(el => {
-            if (el.id === id) {
-                return ({...el, name: newTitle})
-            } else return el;
+        axios({
+            url: `http://localhost:5000/todo/${id}`,
+            method: 'PATCH',
+            data: {name: newTitle}
         })
-        setList(updatedList);
+            .then(res => {
+                getFullList()
+            })
+            .catch(e => e.target.value)
     }
+
+    // const taskEditSave = (id, newTitle) => {
+    //     const updatedList = list.map(el => {
+    //         if (el.id === id) {
+    //             return ({...el, name: newTitle})
+    //         } else return el;
+    //     })
+    //     setList(updatedList);
+    // }
 
     //function which changes array element location based on given direction
     const onTaskMove = (id, direction) => {
         let i = list.findIndex(el => el.id === id);
         let updatedList;
-            updatedList = [...list];
-            if (direction === 'up') {
-                if (i !== 0) {
+        updatedList = [...list];
+        if (direction === 'up') {
+            if (i !== 0) {
                 updatedList.splice(i - 1, 0, updatedList.splice(i, 1)[0]);
-                }
             }
-            if (direction === 'down') {
-                updatedList.splice(i + 1, 0, updatedList.splice(i, 1)[0])
-            }
-            setList(updatedList);
+        }
+        if (direction === 'down') {
+            updatedList.splice(i + 1, 0, updatedList.splice(i, 1)[0])
+        }
+        setList(updatedList);
     }
 
     return (
