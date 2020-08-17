@@ -2,15 +2,8 @@ import React, {useEffect, useState} from 'react';
 import './Main.css';
 import ToDoCreateForm from "./ToDoCreateForm";
 import ToDoList from "./ToDoList";
-import {uuid} from "uuidv4";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import axios from 'axios';
-
-// const initialList = [
-//     {id: 1, title: 'Task 1', done: true},
-//     {id: 2, title: 'Task 2', done: false},
-//     {id: 3, title: 'Task 3', done: true},
-// ];
 
 function App() {
 
@@ -18,7 +11,7 @@ function App() {
 
     const getFullList = () => {
         axios({
-            url: 'http://to-do-app-trial.herokuapp.com/todo',
+            url: 'https://to-do-app-trial.herokuapp.com/todo',
             method: 'GET',
         })
             .then(res => {
@@ -33,7 +26,7 @@ function App() {
 
     const onTaskDelete = (id) => {
         axios({
-            url: `http://to-do-app-trial.herokuapp.com/${id}`,
+            url: `https://to-do-app-trial.herokuapp.com/${id}`,
             method: 'DELETE'
         })
             .then(res => {
@@ -50,7 +43,7 @@ function App() {
 
     const onNewTaskAdd = (name, description) => {
         axios({
-            url: 'http://to-do-app-trial.herokuapp.com/todo',
+            url: 'https://to-do-app-trial.herokuapp.com/todo',
             method: 'POST',
             data: {name, description}
         })
@@ -68,7 +61,7 @@ function App() {
 
     const onStatusChange = (id, state) => {
         axios({
-            url: `http://to-do-app-trial.herokuapp.com/todo/${id}`,
+            url: `https://to-do-app-trial.herokuapp.com/todo/${id}`,
             method: 'PUT',
             data: {done: !state},
         })
@@ -89,7 +82,7 @@ function App() {
 
     const taskEditSave = (id, newTitle, newDesc) => {
         axios({
-            url: `http://to-do-app-trial.herokuapp.com/todo/${id}`,
+            url: `https://to-do-app-trial.herokuapp.com/todo/${id}`,
             method: 'PATCH',
             data: {name: newTitle, description: newDesc}
         })
