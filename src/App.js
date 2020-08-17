@@ -26,8 +26,8 @@ function App() {
 
     const onTaskDelete = (id) => {
         axios({
-            url: `https://to-do-app-trial.herokuapp.com/${id}`,
-            method: 'DELETE'
+            url: `https://to-do-app-trial.herokuapp.com/todo/${id}`,
+            method: 'DELETE',
         })
             .then(res => {
                 getFullList()
