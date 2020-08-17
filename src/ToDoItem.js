@@ -36,13 +36,22 @@ const upBtn = (<svg width="1em" height="1em" viewBox="0 0 16 16" className="bi b
           d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"/>
 </svg>);
 
+const editBtn = (<svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-pencil" fill="currentColor"
+                      xmlns="http://www.w3.org/2000/svg">
+    <path fill-rule="evenodd"
+          d="M11.293 1.293a1 1 0 0 1 1.414 0l2 2a1 1 0 0 1 0 1.414l-9 9a1 1 0 0 1-.39.242l-3 1a1 1 0 0 1-1.266-1.265l1-3a1 1 0 0 1 .242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z"/>
+    <path fill-rule="evenodd"
+          d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 0 0 .5.5H4v.5a.5.5 0 0 0 .5.5H5v.5a.5.5 0 0 0 .5.5H6v-1.5a.5.5 0 0 0-.5-.5H5v-.5a.5.5 0 0 0-.5-.5H3z"/>
+</svg>);
+
 function ToDoItem(props) {
 
     const [editMode, setEditMode] = useState(false);
     const [editTaskTitle, setEditTaskTitle] = useState(props.item.name);
+    const [editTaskDesc, setEditTaskDesc] = useState(props.item.description);
 
     const onTaskEditSave = () => {
-        props.taskEditSave(props.item._id, editTaskTitle);
+        props.taskEditSave(props.item._id, editTaskTitle, editTaskDesc);
         setEditMode(false);
     }
 
@@ -53,23 +62,26 @@ function ToDoItem(props) {
                 ? <>
                     <input type="text" className="form-control form-control-sm"
                            value={editTaskTitle} onChange={(e) => setEditTaskTitle(e.target.value)}/>
-                    <button className="btn btn-outline-secondary btn-sm" onClick={onTaskEditSave}>Save</button>
+                    <input type="text" className="form-control form-control-sm"
+                           value={editTaskDesc} onChange={(e) => setEditTaskDesc(e.target.value)}/>
+                    <button className="btn btn-outline-success btn-sm" onClick={onTaskEditSave}>Save</button>
+                    <button className="btn btn-outline-secondary btn-sm" onClick={() => setEditMode(false)}>Cancel</button>
                 </>
                 :
-                <span className={props.item.done ? "done form-control form-control-sm" : "form-control form-control-sm"}
-                      onDoubleClick={() => setEditMode(true)}>
-                    {props.item.name}
+                <span className={props.item.done ? "done form-control form-control-sm" : "form-control form-control-sm"}>
+                   <strong>{props.item.name}:</strong>  {props.item.description}
                 </span>
             }
             <div className="input-group-append" id="button-addon">
                 <button className="btn btn-outline-secondary btn-sm"
                         onClick={() => props.onStatusChange(props.item._id, props.item.done)}>{props.item.done ? doneBtn : toDoBtn}</button>
+                <button className="btn btn-outline-secondary btn-sm" onClick={() => setEditMode(true)}>{editBtn}</button>
                 <button className="btn btn-outline-secondary btn-sm"
                         onClick={() => props.onTaskDelete(props.item._id)}>{deleteBtn}</button>
-                <button className="btn btn-outline-secondary btn-sm"
-                        onClick={() => props.onTaskMove(props.item._id, 'up')}>{upBtn}</button>
-                <button className="btn btn-outline-secondary btn-sm"
-                        onClick={() => props.onTaskMove(props.item._id, 'down')}>{downBtn}</button>
+                {/*<button className="btn btn-outline-secondary btn-sm"*/}
+                {/*        onClick={() => props.onTaskMove(props.item._id, 'up')}>{upBtn}</button>*/}
+                {/*<button className="btn btn-outline-secondary btn-sm"*/}
+                {/*        onClick={() => props.onTaskMove(props.item._id, 'down')}>{downBtn}</button>*/}
             </div>
         </div>
     );

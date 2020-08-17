@@ -87,11 +87,11 @@ function App() {
     //     setList(updatedList);
     // }
 
-    const taskEditSave = (id, newTitle) => {
+    const taskEditSave = (id, newTitle, newDesc) => {
         axios({
             url: `http://localhost:5000/todo/${id}`,
             method: 'PATCH',
-            data: {name: newTitle}
+            data: {name: newTitle, description: newDesc}
         })
             .then(res => {
                 getFullList()
@@ -99,10 +99,10 @@ function App() {
             .catch(e => e.target.value)
     }
 
-    // const taskEditSave = (id, newTitle) => {
+    // const taskEditSave = (id, newTitle, newDesc) => {
     //     const updatedList = list.map(el => {
     //         if (el.id === id) {
-    //             return ({...el, name: newTitle})
+    //             return ({...el, name: newTitle, description: newDes})
     //         } else return el;
     //     })
     //     setList(updatedList);
