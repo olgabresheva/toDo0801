@@ -33,7 +33,7 @@ function App() {
 
     const onTaskDelete = (id) => {
         axios({
-            url: `http://to-do-app-trial.herokuapp.com/todo/${id}`,
+            url: `http://to-do-app-trial.herokuapp.com/${id}`,
             method: 'DELETE'
         })
             .then(res => {
@@ -50,7 +50,7 @@ function App() {
 
     const onNewTaskAdd = (name, description) => {
         axios({
-            url: 'http://to-do-app-trial.herokuapp.com/todo/',
+            url: 'http://to-do-app-trial.herokuapp.com/todo',
             method: 'POST',
             data: {name, description}
         })
