@@ -18,7 +18,7 @@ function App() {
 
     const getFullList = () => {
         axios({
-            url: 'https://to-do-app-trial.herokuapp.com/todo',
+            url: 'http://to-do-app-trial.herokuapp.com/todo',
             method: 'GET',
         })
             .then(res => {
@@ -33,7 +33,7 @@ function App() {
 
     const onTaskDelete = (id) => {
         axios({
-            url: `https://to-do-app-trial.herokuapp.com/todo/${id}`,
+            url: `http://to-do-app-trial.herokuapp.com/todo/${id}`,
             method: 'DELETE'
         })
             .then(res => {
@@ -50,7 +50,7 @@ function App() {
 
     const onNewTaskAdd = (name, description) => {
         axios({
-            url: 'https://to-do-app-trial.herokuapp.com/todo/',
+            url: 'http://to-do-app-trial.herokuapp.com/todo/',
             method: 'POST',
             data: {name, description}
         })
@@ -68,7 +68,7 @@ function App() {
 
     const onStatusChange = (id, state) => {
         axios({
-            url: `https://to-do-app-trial.herokuapp.com/todo/${id}`,
+            url: `http://to-do-app-trial.herokuapp.com/todo/${id}`,
             method: 'PUT',
             data: {done: !state},
         })
@@ -89,7 +89,7 @@ function App() {
 
     const taskEditSave = (id, newTitle, newDesc) => {
         axios({
-            url: `https://to-do-app-trial.herokuapp.com/todo/${id}`,
+            url: `http://to-do-app-trial.herokuapp.com/todo/${id}`,
             method: 'PATCH',
             data: {name: newTitle, description: newDesc}
         })
