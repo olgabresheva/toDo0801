@@ -63,7 +63,7 @@ function ToDoItem(props) {
             }
             <div className="input-group-append" id="button-addon">
                 <button className="btn btn-outline-secondary btn-sm"
-                        onClick={() => props.onStatusChange(props.item._id)}>{props.item.done ? doneBtn : toDoBtn}</button>
+                        onClick={() => props.onStatusChange(props.item._id, props.item.done)}>{props.item.done ? doneBtn : toDoBtn}</button>
                 <button className="btn btn-outline-secondary btn-sm"
                         onClick={() => props.onTaskDelete(props.item._id)}>{deleteBtn}</button>
                 <button className="btn btn-outline-secondary btn-sm"

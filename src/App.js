@@ -66,11 +66,11 @@ function App() {
     //     setList(updatedList);
     // }
 
-    const onStatusChange = (id) => {
+    const onStatusChange = (id, state) => {
         axios({
             url: `http://localhost:5000/todo/${id}`,
             method: 'PUT',
-            data: {done: true},
+            data: {done: !state},
         })
             .then(res => {
                 getFullList()
